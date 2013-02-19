@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a4j="http://richfaces.org/a4j">
+<h:body>
+    <ui:composition template="/templates/master.xhtml">
+        <ui:define name="divMain"><br/><br/><br/>
+            <h:outputStylesheet>
+                .rf-ac {
+                    width: 500px;
+                }
+
+                .rf-ac-itm-c {
+                    height: 220px;
+                }
+
+                .tooltip-custom-body {
+                    background-color: orange;
+                }
+
+                .tooltip-text {
+                    width: 350px;
+                    height: 80px;
+                    cursor: arrow;
+                    border-width: 2px;
+                    text-align: center;
+                    display: table-cell;
+                    vertical-align: middle;
+                }
+
+                .tooltipData {
+                    font-weight: bold;
+                }
+
+                .red {
+                    color: red;
+                }
+
+                .green {
+                    color: green;
+                }
+
+                .cols {
+                    vertical-align: top;
+                }
+            </h:outputStylesheet>
+            <rich:accordion switchType="client">
+                <rich:accordionItem header="#{mensagens.richfacesDataTable}">
+                    <rich:extendedDataTable value="#{richfacesMB.cidades}"
+                                            var="cidade"
+                                            frozenColumns="2"
+                                            style="height:250px; width:400px;"
+                                            selectionMode="none">
+
+                        <f:facet name="header">
+                            <h:outputText value="#{mensagens.cidadePlural}"/>
+                        </f:facet>
+                        <rich:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{mensagens.cidadeNome}"/>
+                            </f:facet>
+                            <h:outputText value="#{cidade.nome}"/>
+                        </rich:column>
+                        <rich:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{mensagens.cidadeEstado}"/>
+                            </f:facet>
+                            <h:outputText value="#{cidade.estado}"/>
+                        </rich:column>
+                        <rich:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{mensagens.cidadeTotalRuas}"/>
+                            </f:facet>
+                            <h:outputText value="#{cidade.totalRuas}"/>
+                        </rich:column>
+                        <rich:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{mensagens.cidadeTotalBairros}"/>
+                            </f:facet>
+                            <h:outputText value="#{cidade.totalBairros}"/>
+                        </rich:column>
+                        <rich:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{mensagens.cidadeTotalEleitores}"/>
+                            </f:facet>
+                            <h:outputText value="#{cidade.totalEleitores}"/>
+                        </rich:column>
+                        <rich:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{mensagens.cidadeTotalHabitantes}"/>
+                            </f:facet>
+                            <h:outputText value="#{cidade.totalHabitantes}"/>
+                        </rich:column>
+                        <rich:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{mensagens.cidadeTotalHabitacoes}"/>
+                            </f:facet>
+                            <h:outputText value="#{cidade.totalDeHabitacoes}"/>
+                        </rich:column>
+                        <rich:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{mensagens.cidadeAreaQuadrada}"/>
+                            </f:facet>
+                            <h:outputText value="#{cidade.areaQuadradaTotal}"/>
+                        </rich:column>
+                    </rich:extendedDataTable>
+                </rich:accordionItem>
+                <rich:accordionItem header="#{mensagens.richfacesToolTip}">
+                    <h:panelGrid columns="1">
+                        <rich:panel id="normal" styleClass="tooltip-text" bodyClass="rich-laguna-panel-no-header">
+                            <p>#{mensagens.richfacesToolTipNomal}</p>
+                            <rich:tooltip id="tt1" styleClass="tooltip" layout="block">
+                                <span style="white-space: nowrap">#{mensagens.richfacesToolTipNomalTexto}</span>
+                            </rich:tooltip>
+                        </rich:panel>
+                        <rich:panel id="delay" styleClass="tooltip-text" bodyClass="rich-laguna-panel-no-header">
+                            <p>
+                                <h:outputText value="#{mensagens.richfacesToolTipDelay}"/>
+                            </p>
+                            <rich:tooltip followMouse="false" showDelay="2000" styleClass="tooltip-custom-body"
+                                          layout="block">
+                                <span style="white-space: nowrap"> <h:outputText
+                                        value="#{mensagens.richfacesToolTipDelayTexto}" escape="false"/> </span>
+                            </rich:tooltip>
+                        </rich:panel>
+                        <h:form>
+                            <rich:panel id="ajax" styleClass="tooltip-text" bodyClass="rich-laguna-panel-no-header">
+                                <p><h:outputText value="#{mensagens.richfacesToolTipAjax}"/></p>
+                                <rich:tooltip mode="ajax" styleClass="tooltip" layout="block">
+                                    <span style="white-space: nowrap">
+                                        <h:outputText value="#{mensagens.richfacesToolTipAjaxTexto}"
+                                                      escape="false"/><br/><br/>
+                                        <h:outputText value="#{richfacesMB.contadorAjax}"/>
+                                    </span>
+                                </rich:tooltip>
+                            </rich:panel>
+                        </h:form>
+                        <h:form>
+                            <rich:panel id="porClique" styleClass="tooltip-text"
+                                        bodyClass="rich-laguna-panel-no-header">
+                                <p>
+                                    <h:outputText value="#{mensagens.richfacesToolTipPorClique}"/>
+                                </p>
+                                <rich:tooltip followMouse="false" showEvent="click" mode="ajax" styleClass="tooltip"
+                                              layout="block">
+                                    <h:outputText value="#{mensagens.richfacesToolTipPorCliqueTexto}"/><br/><br/>
+                                    <h:outputText value="#{richfacesMB.contadorClique}"/>
+                                </rich:tooltip>
+                            </rich:panel>
+                        </h:form>
+                    </h:panelGrid>
+                </rich:accordionItem>
+                <rich:accordionItem header="#{mensagens.richfacesLog}">
+                    <h:form>
+                        <h:inputText value="#{richfacesMB.nomeEnviado}"/>
+                        <a4j:commandButton value="#{mensagens.enviar}" render="textoEnviado"/>
+                        <br/>
+                        <a4j:outputPanel id="textoEnviado">
+                            <h:outputText value="Hello #{richfacesMB.nomeEnviado}!"
+                                          rendered="#{not empty richfacesMB.nomeEnviado}"/>
+                        </a4j:outputPanel>
+                    </h:form>
+                    <a4j:log/>
+                </rich:accordionItem>
+                <rich:accordionItem header="#{mensagens.richfacesPanelManeu}">
+                    <h:form>
+                        <h:panelGrid columns="2" columnClasses="cols,cols" width="400">
+                            <rich:panelMenu style="width:200px" itemMode="ajax" groupMode="ajax"
+                                            groupExpandedLeftIcon="triangleUp"
+                                            groupCollapsedLeftIcon="triangleDown" topGroupExpandedRightIcon="chevronUp"
+                                            topGroupCollapsedRightIcon="chevronDown" itemLeftIcon="disc"
+                                            itemChangeListener="#{richfacesMB.atualizarGrupoSelecionado}">
+                                <rich:panelMenuGroup label="#{mensagens.richfacesGrupo} 1">
+                                    <rich:panelMenuItem label="Item 1.1" name="Item_1_1"/>
+                                    <rich:panelMenuItem label="Item 1.2" name="Item_1_2"/>
+                                    <rich:panelMenuItem label="Item 1.3" name="Item_1_3"/>
+                                </rich:panelMenuGroup>
+                                <rich:panelMenuGroup label="#{mensagens.richfacesGrupo} 2">
+                                    <rich:panelMenuItem label="Item 2.1" name="Item_2_1"/>
+                                    <rich:panelMenuItem label="Item 2.2" name="Item_2_2"/>
+                                    <rich:panelMenuItem label="Item 2.3" name="Item_2_3"/>
+                                    <rich:panelMenuGroup label="#{mensagens.richfacesGrupo} 2.4">
+                                        <rich:panelMenuItem label="Item 2.4.1" name="Item_2_4_1"/>
+                                        <rich:panelMenuItem label="Item 2.4.2" name="Item_2_4_2"/>
+                                        <rich:panelMenuItem label="Item 2.4.3" name="Item_2_4_3"/>
+                                    </rich:panelMenuGroup>
+                                    <rich:panelMenuItem label="Item 2.5" name="Item_2_5"/>
+                                </rich:panelMenuGroup>
+                                <rich:panelMenuGroup label="#{mensagens.richfacesGrupo} 3">
+                                    <rich:panelMenuItem label="Item 3.1" name="Item_3_1"/>
+                                    <rich:panelMenuItem label="Item 3.2" name="Item_3_2"/>
+                                    <rich:panelMenuItem label="Item 3.3" name="Item_3_3"/>
+                                </rich:panelMenuGroup>
+                            </rich:panelMenu>
+                            <a4j:outputPanel ajaxRendered="true">
+                                <rich:panel rendered="#{not empty richfacesMB.grupoSelecionado}">
+                                    <h:outputText value="#{richfacesMB.grupoSelecionado}" id="current"/>
+                                </rich:panel>
+                            </a4j:outputPanel>
+                        </h:panelGrid>
+                    </h:form>
+                </rich:accordionItem>
+                <rich:accordionItem header="#{mensagens.richfacesRepeat}">
+                    <h:form>
+                        <h:panelGrid columns="1">
+                            <a4j:outputPanel id="panel" layout="block">
+                                <a4j:repeat value="#{richfacesMB.cidadesParaRepeat}" var="cidade" rows="20" id="repeat">
+                                    <rich:panel style="float:left; width:200px; padding:5px;">
+                                        <f:facet name="header">
+                                            <h:panelGroup>
+                                                <h:outputText value="#{cidade.nome}" style="font-weight:bold" />
+                                            </h:panelGroup>
+                                        </f:facet>
+                                        <h:panelGrid columns="2">
+                                            <h:outputText value="#{mensagens.cidadeEstado}" style="font-weight:bold" />
+                                            <h:outputText value="#{cidade.estado}" />
+                                            <h:outputText value="#{mensagens.cidadeTotalHabitantes}" style="font-weight:bold" />
+                                            <h:outputText value="#{cidade.totalDeHabitacoes}" />
+                                        </h:panelGrid>
+                                    </rich:panel>
+                                </a4j:repeat>
+                            </a4j:outputPanel>
+                            <a4j:outputPanel layout="block">
+                                <rich:dataScroller for="repeat" render="panel" />
+                            </a4j:outputPanel>
+                        </h:panelGrid>
+                    </h:form>
+                </rich:accordionItem>
+            </rich:accordion>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

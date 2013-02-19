@@ -1,0 +1,51 @@
+html {
+    overflow: hidden;
+}
+
+body {
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Courier, monospace;
+    font-size: small;
+}
+
+h1 {
+    font-size: 1.6em;
+    color: #006400;
+}
+
+p {
+    color: gray;
+}
+
+#divLeft {
+    padding-left: 10px;
+    margin: 0;
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    bottom: 20px;
+    overflow: auto;
+    width: 300px;
+    background: #ECF1EF;
+}
+
+#divMain {
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 20px;
+    left: 330px;
+    right: 20px;
+    bottom: 20px;
+    overflow: auto;
+    background: #ECF1EF;
+}
+
+.titulo{
+    font-size: x-large;
+    color: #006400;
+}

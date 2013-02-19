@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html">
+<h:body>
+	<ui:composition template="/templates/master.xhtml">
+		<ui:define name="divMain"><br/><br/><br/>
+             <h:form>
+
+	             <h:outputText value="#{mensagens.sendRedirectInicioMessage}" escape="false"/><br/>
+
+                 <h:outputText value="#{mensagens.sendRedirectCadastre}:" />
+	             <h:panelGrid columns="2" >
+	             	<h:outputText value="#{mensagens.cidadeNome}" />
+	             	<h:inputText value="#{sendRedirectMB.cidade.nome}" />
+                     <h:outputText value="#{mensagens.cidadeEstado}" />
+                     <h:inputText value="#{sendRedirectMB.cidade.estado}" />
+	             </h:panelGrid>
+
+             	<h:commandButton action="#{sendRedirectMB.redirecionarSemFlash}" value="#{mensagens.sendRedirectEnviarSemFlashScope}" /><br/>
+             	<h:commandButton action="#{sendRedirectMB.redirecionarComFlash}" value="#{mensagens.sendRedirectEnviarComFlashScope}" >
+             	</h:commandButton>
+             </h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

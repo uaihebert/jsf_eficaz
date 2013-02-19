@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui" >
+<h:body>
+    <ui:composition template="/templates/master.xhtml">
+        <ui:define name="divMain"><br/><br/><br/>
+            <p:ajaxStatus onstart="statusDialog.show();"
+                          onsuccess="statusDialog.hide();"/>
+
+            <p:dialog modal="true" widgetVar="statusDialog" header="Status"
+                      draggable="false" closable="false">
+                <p:graphicImage library="gifs" name="ajaxloadingbar.gif" />
+            </p:dialog>
+            <h:form>
+                <h:panelGrid columns="3">
+                    <h:outputText value="#{mensagens.ajaxSelecioneEstado}: "/>
+                    <h:outputText value="#{mensagens.ajaxSelecioneCidade}: "/>
+                    <h:outputText value="#{mensagens.ajaxBairro}: " />
+                    <h:selectOneMenu value="#{ajaxMB.estadoSelcionado}" style="width: 200px;">
+                        <f:selectItem itemLabel="#{mensagens.ajaxSelecione}" itemValue=""/>
+                        <f:selectItems value="#{ajaxMB.estados}"/>
+                        <f:ajax execute="@this" render="selectCidade selectBairro" listener="#{ajaxMB.alterarEstado}" />
+                    </h:selectOneMenu>
+                    <h:selectOneMenu id="selectCidade" value="#{ajaxMB.cidadeSelecionada}" style="width: 200px;">
+                        <f:selectItem itemLabel="#{mensagens.ajaxSelecione}" itemValue=""/>
+                        <f:selectItems value="#{ajaxMB.cidades}"/>
+                        <f:ajax execute="@this" render="selectBairro" listener="#{ajaxMB.alterarCidade}" />
+                    </h:selectOneMenu>
+                    <h:selectOneMenu id="selectBairro" value="#{ajaxMB.bairroSelcionado}" style="width: 200px;">
+                        <f:selectItem itemLabel="#{mensagens.ajaxSelecione}" itemValue=""/>
+                        <f:selectItems value="#{ajaxMB.bairros}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:body>
+	<ui:composition template="/templates/master.xhtml">
+		<ui:define name="divMain">
+            <p class="titulo" ><h:outputText value="#{mensagens.bemVindo}" /></p><br/>
+            <h:outputText value="#{mensagens.internacionalizacaoTexto}:" />
+            <h:form>
+            	<h:selectOneMenu value="#{usuarioMB.linguaEscolhida}">
+            		<f:selectItem itemValue="pt" itemLabel="#{mensagens.internacionalizacaoPT}"/>
+            		<f:selectItem itemValue="en" itemLabel="#{mensagens.internacionalizacaoEN}"/>
+            	</h:selectOneMenu> <h:commandButton action="#{usuarioMB.alterarIdioma}" value="#{mensagens.internacionalizacaoTrocar}" />
+            </h:form><br/>
+            <h:form>
+                <h:messages />
+            	<h:outputText value="#{mensagens.internacionalizacaoTeste}" /><br/>
+            	<h:inputText value="" required="true" />
+            	<h:commandButton action="#{usuarioMB.alterarIdioma}" value="#{mensagens.internacionalizacaoEnviar}" />
+            </h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

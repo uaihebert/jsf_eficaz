@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ace="http://www.icefaces.org/icefaces/components"
+      xmlns:icecore="http://www.icefaces.org/icefaces/core">
+<h:body>
+    <ui:composition template="/templates/master.xhtml">
+        <ui:define name="divMain"><br/><br/><br/>
+            <icecore:config render="true" />
+            <ace:accordion collapsible="true" id="accordionInformacoes">
+                <ace:accordionPane title="#{mensagens.icefacesMenuLog}">
+                    <h:form>
+                        <h:panelGrid columns="2" columnClasses="menuStyle, menuLogStyle">
+                            <ace:menu type="plain" id="exampleMenu" >
+                                <ace:submenu label="File" id="file">
+                                    <ace:menuItem id="new"
+                                                  value="New"
+                                                  actionListener="#{icefacesMB.fireAction}"
+                                                  icon="ui-icon">
+                                        <ace:ajax event="activate" execute="@this" render="message" />
+                                    </ace:menuItem>
+                                    <ace:menuItem   id="open"
+                                                    value="Open"
+                                                    actionListener="#{icefacesMB.fireAction}"
+                                                    icon="ui-icon">
+                                        <ace:ajax event="activate" execute="@this" render="message" />
+                                    </ace:menuItem>
+                                    <ace:menuItem id="save"
+                                                  value="Save"
+                                                  actionListener="#{icefacesMB.fireAction}"
+                                                  icon="ui-icon ui-icon-disk">
+                                        <ace:ajax event="activate" execute="@this" render="message" />
+                                    </ace:menuItem>
+                                    <ace:menuItem id="delete"
+                                                  value="Delete"
+                                                  actionListener="#{icefacesMB.fireAction}"
+                                                  icon="ui-icon ui-icon-close">
+                                        <ace:ajax event="activate" execute="@this" render="message" />
+                                    </ace:menuItem>
+                                </ace:submenu>
+
+                                <ace:submenu id="view" label="View">
+                                    <ace:menuItem id="horizontal"
+                                                  value="Horizontal"
+                                                  actionListener="#{icefacesMB.fireAction}"
+                                                  icon="ui-icon">
+                                        <ace:ajax event="activate" execute="@this" render="message" />
+                                    </ace:menuItem>
+                                    <ace:menuItem id="vertical"
+                                                  value="Vertical"
+                                                  actionListener="#{icefacesMB.fireAction}"
+                                                  icon="ui-icon">
+                                        <ace:ajax event="activate" execute="@this" render="message" />
+                                    </ace:menuItem>
+                                    <ace:menuItem id="fill"
+                                                  value="Fill"
+                                                  actionListener="#{icefacesMB.fireAction}"
+                                                  icon="ui-icon">
+                                        <ace:ajax event="activate" execute="@this" render="message" />
+                                    </ace:menuItem>
+                                </ace:submenu>
+
+                                <ace:submenu label="Links">
+                                    <ace:menuItem value="uaiHebert" url="http://uaihebert.com" target="_blank" icon="ui-icon ui-icon-home"/>
+                                    <ace:menuItem value="GUJ" url="http://www.guj.com.br" target="_blank" icon="ui-icon ui-icon-home"/>
+                                    <ace:menuItem value="Casa do Codigo" url="http://www.casadocodigo.com.br" target="_blank" icon="ui-icon ui-icon-home"/>
+                                </ace:submenu>
+                            </ace:menu>
+
+                            <ace:panel  header="#{mensagens.icefacesMenuLog}">
+                                <h:dataTable id="message" value="#{icefacesMB.menuList}" var="message">
+                                    <h:column>
+                                        <h:outputText id="msg" value="#{message}"/>
+                                    </h:column>
+                                </h:dataTable>
+                            </ace:panel>
+                        </h:panelGrid>
+                    </h:form>
+                </ace:accordionPane>
+                <ace:accordionPane title="#{mensagens.icefacesDialog}" id="accordionDialog">
+                    <h:form id="formDialog">
+                        <h:panelGrid styleClass="centeredPanelGrid" id="panelGridDialog">
+                            <h:commandButton id="save" value="Save" onclick="confirmation.show()" type="button"/>
+                            <h:outputText id="outcome" value="#{icefacesMB.resultadoDialog}"
+                                          rendered="#{icefacesMB.resultadoDialog != null}"/>
+                        </h:panelGrid>
+                    </h:form>
+                </ace:accordionPane>
+                <ace:accordionPane title="#{mensagens.icefacesRichText}">
+                    <h:form>
+
+                        <ace:panel>
+                            <ace:richTextEntry value="#{icefacesMB.richText}"
+                                               language="en"
+                                               skin="kama"
+                                               toolbar="Default"
+                                               height="350">
+                                <ace:ajax event="save" execute="@form" render="@form" />
+                            </ace:richTextEntry>
+                            <div style="border: 1px solid #000">
+                                <h:outputText value="#{mensagens.icefacesRichTextDescricao}: #{icefacesMB.richText}" />
+                            </div>
+                        </ace:panel>
+                    </h:form>
+                </ace:accordionPane>
+                <ace:accordionPane title="#{mensagens.icefacesData}">
+                    <h:form>
+                        <ace:dateTimeEntry value="#{icefacesMB.data}"
+                                           pattern="dd/MM/yyyy"
+                                           renderAsPopup="true"/>
+                    </h:form>
+                </ace:accordionPane>
+                <ace:accordionPane title="#{mensagens.icefacesResize}">
+                    <h:form>
+                            <br/>
+                            <h:inputTextarea id="textInput"
+                                             value="#{mensagens.icefacesResizeEfeito}"
+                                             style="color: black; height: 200px; width: 400px;">
+
+                                <ace:resizable animate="true" ghost="true" aspectRatio="true" proxy="true" effect="easeOutBounce" effectDuration="slow" minHeight="50" minWidth="200" maxHeight="250" maxWidth="650"/>
+                            </h:inputTextarea>
+                            <ace:panel header="#{mensagens.icefacesResizePanel}" style="font-size: 10pt; width: 300px; height: 160px;">
+
+                                <h:outputText value="#{mensagens.icefacesResizeGradual}" />
+                                <ace:resizable handles="all" grid="20" minHeight="160" minWidth="300" maxHeight="300" maxWidth="700"/>
+
+                            </ace:panel>
+                    </h:form>
+                </ace:accordionPane>
+            </ace:accordion>
+            <h:form id="formConfirmDialog">
+                <ace:confirmationDialog id="confirmDialog"
+                                        widgetVar="confirmation"
+                                        message="Are you sure about this?"
+                                        header="Confirmation"
+                                        width="250"
+                                        height="100"
+                                        closable="true"
+                                        position="center">
+                    <h:panelGrid columns="2" styleClass="centeredPanelGrid">
+                        <h:commandButton id="yes" value="Yes" onclick="confirmation.hide()"
+                                         actionListener="#{icefacesMB.dialogSim}"/>
+                        <h:commandButton id="no" value="No" onclick="confirmation.hide()"
+                                         actionListener="#{icefacesMB.dialogNao}"/>
+                    </h:panelGrid>
+                </ace:confirmationDialog>
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:ui="http://java.sun.com/jsf/facelets" 
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:body>
+	<ui:composition>
+		<p:button outcome="/index.xhtml" value="#{mensagens.index}" /><br/>
+        <h:form>
+            <h:panelGrid columns="1">
+                <h:panelGroup>
+                    <p><h:outputText value="#{mensagens.troqueTema}:" /></p>
+                    <p:selectOneMenu value="#{usuarioMB.userCSS}">
+                        <f:selectItems value="#{usuarioMB.cssDisponivel}" />
+                    </p:selectOneMenu>
+                </h:panelGroup>
+            </h:panelGrid>
+            <p:commandButton value="#{mensagens.troqueTemaTrocar}" action="#{usuarioMB.alterarEstilo()}" ajax="false" />
+        </h:form><br/>
+        <h:form>
+            <h:panelGrid columns="1">
+                <h:outputText value="#{mensagens.troqueTemaPrimefaces}:" />
+                <p:themeSwitcher value="#{usuarioMB.tema}" style="width:165px" effect="fade">
+                    <f:selectItems value="#{temasDisponiveis.temas}" />
+                    <p:ajax listener="#{usuarioMB.alterarTema}" />
+                </p:themeSwitcher>
+            </h:panelGrid>
+        </h:form><br/>
+		<h:form>
+            <p:tabView effect="fade" orientation="top" style="font-size: small" activeIndex="#{usuarioMB.tabAtiva}">
+                <p:ajax event="tabChange" listener="#{usuarioMB.onTabChange}"/>
+                <p:tab title="#{mensagens.parte2}" >
+                    <p:button outcome="/paginas/parte2/applicationScoped.xhtml" value="#{mensagens.applicationScoped}" /><br/>
+                    <p:button outcome="/paginas/parte2/conversationScoped.xhtml" value="#{mensagens.conversationScoped}" /><br/>
+                    <p:button outcome="/paginas/parte2/dependentScoped.xhtml" value="#{mensagens.dependentScoped}" /><br/>
+                    <p:button outcome="/paginas/parte2/noneScoped.xhtml" value="#{mensagens.noneScoped}" /><br/>
+                    <p:button outcome="/paginas/parte2/requestScoped.xhtml" value="#{mensagens.requestScoped}" /><br/>
+                    <p:button outcome="/paginas/parte2/sessionScoped.xhtml" value="#{mensagens.sessionScoped}" /><br/>
+                    <p:button outcome="/paginas/parte2/viewScoped.xhtml" value="#{mensagens.viewScoped}" /><br/>
+                    <p:button outcome="/paginas/parte2/sendRedirect/inicio.xhtm" value="#{mensagens.sendRedirect}" /><br/>
+                </p:tab>
+                <p:tab title="#{mensagens.parte3}">
+                    <p:button outcome="/paginas/parte3/utilizandoBibliotecas.xhtml" value="#{mensagens.bibliotecas}" />
+                    <p:button outcome="/paginas/parte3/enviandoValores.xhtml" value="#{mensagens.enviarValor}" />
+                </p:tab>
+                <p:tab title="#{mensagens.parte4}">
+                    <p:button outcome="/paginas/parte4/primefaces.xhtml" value="#{mensagens.primefaces}" />
+                    <p:button outcome="/paginas/parte4/richfaces.xhtml" value="#{mensagens.richfaces}" />
+                    <p:button outcome="/paginas/parte4/icefaces.xhtml" value="#{mensagens.icefaces}" />
+                    <p:button outcome="/paginas/parte4/dataTableNatural.xhtml" value="#{mensagens.dataTableSemPaginacao}" />
+                    <p:button outcome="/paginas/parte4/dataTablePaginacaoSessao.xhtml" value="#{mensagens.dataTablePaginacaoSessao}" />
+                    <p:button outcome="/paginas/parte4/dataTablePaginacaoPorDemanda.xhtml" value="#{mensagens.dataTablePaginacaoPorDemanda}" />
+                </p:tab>
+                <p:tab title="#{mensagens.parte5}">
+                    <p:button outcome="/paginas/parte5/ajax.xhtml" value="#{mensagens.ajax}" />
+                    <p:button outcome="/paginas/parte5/desabilitarBotao.xhtml" value="#{mensagens.ajaxDesabilitarBotao}" />
+                </p:tab>
+            </p:tabView>
+		</h:form>
+	</ui:composition>
+</h:body>
+</html>

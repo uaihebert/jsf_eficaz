@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:body>
+    <ui:composition template="/templates/master.xhtml">
+        <ui:define name="divMain"><br/><br/><br/>
+            <h:form>
+                <h:commandButton value="#{mensagens.ajaxBotaoTravado}" style="height: 70px">
+                    <f:ajax execute="@form"
+                            render="@form"
+                            listener="#{ajaxMB.chamadaAjax}"
+                            onevent="desabilitarBotao" />
+                </h:commandButton>
+            </h:form>
+            <script type="text/javascript">
+                function desabilitarBotao(evento) {
+                    var botao = evento.source;
+                    var statusAjax = evento.status;
+
+                    switch (statusAjax) {
+                        case "begin":
+                            botao.disabled = true;
+                            break;
+
+                        case "complete":
+                            break;
+
+                        case "success":
+                            botao.disabled = false;
+                            break;
+                    }
+                }
+            </script>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

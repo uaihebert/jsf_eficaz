@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <h:outputStylesheet library="css" name="#{usuarioMB.userCSS}" />
+    <h:outputScript library="javascript" name="ola.js" />
+</h:head>
+<h:body>
+	<f:view contentType="text/html; charset=ISO-8859-1" encoding="ISO-8859-1" locale="#{usuarioMB.locale}">
+		<div id="divLeft">
+			<ui:insert name="divLeft">
+				<ui:include src="left.xhtml" />
+			</ui:insert>
+		</div>
+
+		<div id="divMain">
+			<ui:insert name="divMain" />
+		</div>
+	</f:view>
+</h:body>
+</html>
